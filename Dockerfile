@@ -17,6 +17,6 @@ LABEL about.tags="Genomics"
 ################## MAINTAINER ######################
 MAINTAINER Saulo Alves Aflitos <sauloal@gmail.com>
 
-RUN conda install picard=2.27.5
+RUN conda install picard=2.3.0
 
 WORKDIR /data/
