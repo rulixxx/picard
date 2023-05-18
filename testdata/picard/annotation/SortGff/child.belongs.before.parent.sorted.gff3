@@ -1,5 +1,0 @@
-##gff-version 3.1.25
-chr1	.	promoter	125	135	.	+	.	ID=promoter1;Parent=gene1
-chr1	.	gene	150	250	.	+	.	ID=gene1
-###
-chr1	.	gene	300	400	.	+	.	.
