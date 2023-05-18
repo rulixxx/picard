@@ -9,6 +9,7 @@ RUN apt-get update && \
     apt-get --no-install-recommends install -y \
         git \
         r-base \
+	samtools \
         ant && \
     apt-get clean autoclean && \
     apt-get autoremove -y
