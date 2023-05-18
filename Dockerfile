@@ -1,23 +1,24 @@
-################## BASE IMAGE ######################
-FROM biocontainers/biocontainers:v1.0.0_cv4
+FROM  ubuntu:22.04 as builder
 
-################## METADATA ######################
-LABEL base_image="biocontainers:v1.0.0_cv4"
-LABEL version="3"
-LABEL software="Picard"
-LABEL software.version="2.3.0"
-LABEL about.summary="A set of Java command line tools for manipulating high-throughput sequencing (HTS) data and formats."
-LABEL about.home="https://github.com/broadinstitute/picard/"
-LABEL about.documentation="https://github.com/broadinstitute/picard/"
-LABEL about.license_file="https://github.com/broadinstitute/picard/blob/master/LICENSE.txt"
-LABEL about.license="SPDX:MIT"
-LABEL extra.identifiers.biotools="picard_tools"
-LABEL about.tags="Genomics"
+USER  root
 
-################## MAINTAINER ######################
-MAINTAINER Saulo Alves Aflitos <sauloal@gmail.com>
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get -yq update
+RUN apt-get install -yq --no-install-recommends locales
+RUN apt-get -y install wget
+RUN apt-get -y install samtools
+RUN apt-get -y install default-jre
 
-RUN conda install picard=2.3.0
-RUN conda install samtools=1.9
+RUN mkdir /usr/local/share/picard-2.27.5
+RUN ln -s /usr/bin/java /usr/local/bin/java
+RUN wget -P /usr/local/share/picard-2.27.5 https://github.com/broadinstitute/picard/releases/download/2.27.5/picard.jar
+COPY picard /usr/local/share/picard-2.27.5
+RUN ln -s /usr/local/share/picard-2.27.5/picard /usr/local/bin/picard
 
-WORKDIR /data/
+## USER CONFIGURATION
+RUN adduser --disabled-password --gecos '' ubuntu && chsh -s /bin/bash && mkdir -p /home/ubuntu
+
+USER    ubuntu
+WORKDIR /home/ubuntu
+
+CMD ["/bin/bash"]
