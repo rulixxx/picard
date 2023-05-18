@@ -1,3 +1,2 @@
-FROM quay.io/picard:2.27.5--hdfd78af_0
-
+FROM quay.io/wtsicgp/pcap-core:5.7.0
 WORKDIR /usr/working
