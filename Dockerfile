@@ -18,5 +18,6 @@ LABEL about.tags="Genomics"
 MAINTAINER Saulo Alves Aflitos <sauloal@gmail.com>
 
 RUN conda install picard=2.3.0
+RUN conda install samtools=1.9
 
 WORKDIR /data/
