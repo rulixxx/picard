@@ -1,2 +1,2 @@
-FROM quay.io/wtsicgp/pcap-core:5.7.0
+FROM quay.io/biocontainers/picard/2.27.5--hdfd78af_0
 WORKDIR /usr/working
